@@ -1,25 +1,23 @@
+import java.util.*
+
 fun main() {
-    val word = readln()
+    val scanner = Scanner(System.`in`)
 
-    var charCounter = 0
-    var nextChar = 1
+    val string = scanner.next(); val n = scanner.nextInt()
+    var newString = ""
 
-    if (word.isEmpty()) {
-        return
+    if (n > string.lastIndex) {
+        println(string)
     } else {
-        for (currentChar in word) {
-            charCounter++
+        for (i in n..string.lastIndex) {
+            newString += string[i]
+        }
 
-            if (nextChar == word.length) {
-                print("$currentChar$charCounter")
-            } else if (currentChar == word[nextChar]) {
-                nextChar++
-            } else {
-                print("$currentChar$charCounter")
-                charCounter = 0
-                nextChar++
-            }
+        for (i in 0 until n) {
+            newString += string[i]
         }
     }
+
+    println(newString)
 }
 
