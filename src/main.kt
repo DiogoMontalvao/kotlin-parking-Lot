@@ -1,23 +1,19 @@
-import java.util.*
-
 fun main() {
-    val scanner = Scanner(System.`in`)
+    val interval = readln().toInt()..readln().toInt()
 
-    val string = scanner.next(); val n = scanner.nextInt()
-    var newString = ""
-
-    if (n > string.lastIndex) {
-        println(string)
-    } else {
-        for (i in n..string.lastIndex) {
-            newString += string[i]
-        }
-
-        for (i in 0 until n) {
-            newString += string[i]
+    for (i in interval) {
+        when {
+            isFizzBuzz(i) -> println("FizzBuzz")
+            isFizz(i) -> println("Fizz")
+            isBuzz(i) -> println("Buzz")
+            else -> println(i)
         }
     }
-
-    println(newString)
 }
+
+fun isFizzBuzz(i: Int): Boolean { return i % 5 == 0 && i % 3 == 0 }
+
+fun isFizz(i: Int): Boolean { return i % 3 == 0 }
+
+fun isBuzz(i: Int): Boolean { return i % 5 == 0 }
 
