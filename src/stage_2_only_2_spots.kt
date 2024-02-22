@@ -23,13 +23,16 @@ fun main() {
         }
         LEAVE -> {
             spotNumber = scanner.nextInt()
-
-            when (spotNumber) {
-                OCCUPIED -> println("Spot $spotNumber is free.")
-                FREE -> println("There is no car in spot $spotNumber.")
-            }
+            leave(spotNumber)
         }
     }
 
     scanner.close()
+}
+
+fun leave(spotNumber: Int) {
+    when (spotNumber) {
+        OCCUPIED -> println("Spot $spotNumber is free.")
+        FREE -> println("There is no car in spot $spotNumber.")
+    }
 }
