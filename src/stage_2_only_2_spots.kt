@@ -1,9 +1,10 @@
 import java.util.*
 
-const val PARK = "park"
-const val LEAVE = "leave"
-const val OCCUPIED = 1
-const val FREE = 2
+private const val PARK = "park"
+private const val LEAVE = "leave"
+
+private const val OCCUPIED = 1
+private const val FREE = 2
 
 fun main() {
     val scanner = Scanner(System.`in`)
@@ -29,4 +30,6 @@ fun main() {
             }
         }
     }
+
+    scanner.close()
 }

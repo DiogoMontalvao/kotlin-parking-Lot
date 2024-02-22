@@ -1,19 +1,23 @@
 import java.util.*
 
+private const val PARK = 0
+private const val LEFT = 1
+private const val PARKED = 2
+
 fun main() {
     val scanner = Scanner(System.`in`)
 
-    var count = 0
-    while(scanner.hasNext()) {
-        var car = scanner.next()
+    var counter = 0
+    while (scanner.hasNext()) {
+        val car = scanner.next()
 
-        when (count) {
-            0 -> println("$car car has parked.")
-            1 -> println("$car car left the parking lot.")
-            2 -> println("$car car just parked here.")
+        when (counter) {
+            PARK -> println("$car car has parked.")
+            LEFT -> println("$car car left the parking lot.")
+            PARKED -> println("$car car just parked here.")
         }
+        counter++
 
-        count++
-        if (count > 2) count = 0
+        if (counter > 2) counter = 0
     }
 }
