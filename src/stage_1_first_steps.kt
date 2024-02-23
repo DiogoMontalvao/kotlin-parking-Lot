@@ -3,17 +3,17 @@ private const val LEFT = 1
 private const val PARKED = 2
 
 fun main() {
-    var counter = 0
+    var command = PARK
     while (scanner.hasNext()) {
-        val car = scanner.next()
+        val carColor = scanner.next()
 
-        when (counter) {
-            PARK -> println("$car car has parked.")
-            LEFT -> println("$car car left the parking lot.")
-            PARKED -> println("$car car just parked here.")
+        when (command) {
+            PARK -> println("$carColor car has parked.")
+            LEFT -> println("$carColor car left the parking lot.")
+            PARKED -> println("$carColor car just parked here.")
         }
-        counter++
+        command++
 
-        if (counter > 2) counter = 0
+        if (command > PARKED) command = PARK
     }
 }
