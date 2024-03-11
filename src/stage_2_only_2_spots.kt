@@ -27,9 +27,7 @@ fun main() {
     scanner.close()
 }
 
-private fun park(carColor: String) {
-    println("$carColor car parked in spot 2.")
-}
+private fun park(carColor: String) { println("$carColor car parked in spot 2.") }
 
 private fun leave(spotNumber: Int) {
     when (spotNumber) {

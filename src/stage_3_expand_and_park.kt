@@ -14,8 +14,8 @@ fun main() {
     var carColor: String
     var spotNumber: Int
 
-    var running = true
-    while (running) {
+    var isRunning = true
+    while (isRunning) {
         val command = scanner.next()
         when (command) {
             PARK -> {
@@ -27,11 +27,11 @@ fun main() {
 
             LEAVE -> {
                 spotNumber = scanner.nextInt()
-
+                
                 leave(parkingLot, spotNumber)
             }
 
-            EXIT -> running = false
+            EXIT -> isRunning = !isRunning
         }
     }
 
@@ -47,22 +47,23 @@ private fun park(parkingLot: MutableList<Boolean>, carColor: String) {
                 parkingLot[spot] = OCCUPIED
 
                 println("$carColor car parked in spot ${spot + 1}")
-
                 break
             }
         }
     }
 }
 
-private fun isParkingLotFull(parkingLot: MutableList<Boolean>): Boolean {
-    var spotsOccupied = 0
-    parkingLot.forEach { if (it == OCCUPIED) spotsOccupied++ }
-
-    return spotsOccupied == MAX_CAPACITY
-}
-
 private fun leave(parkingLot: MutableList<Boolean>, spotNumber: Int) {
     parkingLot[spotNumber - 1] = FREE
 
     println("Spot $spotNumber is free.")
+}
+
+private fun isParkingLotFull(parkingLot: MutableList<Boolean>): Boolean {
+    var spotsOccupied = 0
+    parkingLot.forEach { spot ->
+        if (spot == OCCUPIED) spotsOccupied++
+    }
+
+    return spotsOccupied == MAX_CAPACITY
 }
