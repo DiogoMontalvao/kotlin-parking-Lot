@@ -1,30 +1,26 @@
 import java.util.*
-import kotlin.math.absoluteValue
-import kotlin.math.max
 
 val scanner = Scanner(System.`in`)
 
-fun main() {
-    carPrice()
+fun main(args: Array<String>) {
+    val input = Scanner(System.`in`)
+    val title = input.nextLine()
+    val author = input.nextLine()
+    val pages = input.nextInt()
+
+    val book = Book(title, author, pages)
 }
 
-fun carPrice(old: Int = 5, kilometers: Int = 100_000, maximumSpeed: Int = 120, automatic: Boolean = false) {
-    var currentCarPrice = 20_000
-
-    currentCarPrice -= 2_000 * old
-
-    when {
-        maximumSpeed > 120 -> currentCarPrice += 100 * (120 - maximumSpeed).absoluteValue
-        maximumSpeed < 120 -> currentCarPrice -= 100 * (120 - maximumSpeed).absoluteValue
+class Book(
+    val title: String,
+    val author: String,
+    val pages: Int
+) {
+    init {
+        description(title, author, pages)
     }
 
-    if (kilometers >= 10000) {
-        val temp = kilometers / 10000
-        currentCarPrice -= temp * 200
+    fun description(title: String, author: String, pages: Int) {
+        println("$title by $author has $pages pages")
     }
-
-    if (automatic) currentCarPrice += 1500
-
-    println(currentCarPrice)
 }
-

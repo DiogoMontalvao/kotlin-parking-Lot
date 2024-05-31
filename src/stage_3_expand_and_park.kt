@@ -2,68 +2,68 @@ private const val PARK = "park"
 private const val LEAVE = "leave"
 private const val EXIT = "exit"
 
-private const val OCCUPIED = true
-private const val FREE = false
+private const val SPOT_FREE = false
+private const val SPOT_OCCUPIED = true
 
 private const val MAX_CAPACITY = 20
 
+private val parkingLot = MutableList(MAX_CAPACITY) { SPOT_FREE }
+
 fun main() {
-    val parkingLot = MutableList(MAX_CAPACITY) { FREE }
+    runProgram()
+}
 
-    var carRegistrationNumber: String
-    var carColor: String
-    var spotNumber: Int
-
+private fun runProgram() {
     var isRunning = true
     while (isRunning) {
         val command = scanner.next()
+
         when (command) {
-            PARK -> {
-                carRegistrationNumber = scanner.next()
-                carColor = scanner.next()
-
-                park(parkingLot, carColor)
-            }
-
-            LEAVE -> {
-                spotNumber = scanner.nextInt()
-                
-                leave(parkingLot, spotNumber)
-            }
-
-            EXIT -> isRunning = !isRunning
+            PARK -> park()
+            LEAVE -> leave()
+            EXIT -> isRunning = false
         }
     }
-
-    scanner.close()
 }
 
-private fun park(parkingLot: MutableList<Boolean>, carColor: String) {
-    if (isParkingLotFull(parkingLot)) {
+private fun park() {
+    val registrationNumber = scanner.next()
+    val carColor = scanner.next()
+
+    if (isParkingLotFull()) {
         println("Sorry, the parking lot is full.")
     } else {
-        for (spot in parkingLot.indices) {
-            if (parkingLot[spot] == FREE) {
-                parkingLot[spot] = OCCUPIED
+        for (spotIndex in parkingLot.indices) {
+            val spotNumber = spotIndex + 1
 
-                println("$carColor car parked in spot ${spot + 1}")
+            if (parkingLot[spotIndex] == SPOT_FREE) {
+
+                parkingLot[spotIndex] = SPOT_OCCUPIED
+                println("$carColor car parked in spot $spotNumber.")
                 break
             }
         }
     }
 }
 
-private fun leave(parkingLot: MutableList<Boolean>, spotNumber: Int) {
-    parkingLot[spotNumber - 1] = FREE
-
-    println("Spot $spotNumber is free.")
-}
-
-private fun isParkingLotFull(parkingLot: MutableList<Boolean>): Boolean {
+private fun isParkingLotFull(): Boolean {
     var spotsOccupied = 0
-    parkingLot.forEach { spot ->
-        if (spot == OCCUPIED) spotsOccupied++
+
+    for (spot in parkingLot) {
+        if (spot == SPOT_OCCUPIED) spotsOccupied++
     }
 
     return spotsOccupied == MAX_CAPACITY
+}
+
+private fun leave() {
+    val spotNumber = scanner.nextInt()
+    val spotIndex = spotNumber - 1
+
+    if (parkingLot[spotIndex] == SPOT_FREE) {
+        println("There is no car in spot $spotNumber.")
+    } else {
+        parkingLot[spotIndex] = SPOT_FREE
+        println("Spot $spotNumber is free.")
+    }
 }
