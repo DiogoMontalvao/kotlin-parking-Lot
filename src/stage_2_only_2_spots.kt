@@ -7,10 +7,6 @@ private const val SPOT_OCCUPIED = true
 private val parkingLot = mutableListOf(SPOT_OCCUPIED, SPOT_FREE)
 
 fun main() {
-    runProgram()
-}
-
-private fun runProgram() {
     val command = scanner.next()
 
     when (command) {

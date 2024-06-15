@@ -10,10 +10,6 @@ private const val MAX_CAPACITY = 20
 private val parkingLot = MutableList(MAX_CAPACITY) { SPOT_FREE }
 
 fun main() {
-    runProgram()
-}
-
-private fun runProgram() {
     var isRunning = true
     while (isRunning) {
         val command = scanner.next()

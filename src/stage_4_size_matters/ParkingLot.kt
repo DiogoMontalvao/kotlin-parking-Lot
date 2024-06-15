@@ -1,11 +1,8 @@
 package stage_4_size_matters
 
-import scanner
-
 private val SPOT_FREE = null
 
 class ParkingLot() {
-
     private var isParkingLotCreated = false
     private var parkingLotSpots = MutableList<Car?>(0) { SPOT_FREE }
 
@@ -74,6 +71,7 @@ class ParkingLot() {
     }
 
     private fun isParkingLotFull(): Boolean {
+
         var spotsOccupied = 0
 
         parkingLotSpots.forEach { spot ->
@@ -84,6 +82,7 @@ class ParkingLot() {
     }
 
     private fun isParkingLotEmpty(): Boolean {
+
         var isEmpty = true
 
         for (spot in parkingLotSpots) {
@@ -97,6 +96,7 @@ class ParkingLot() {
     }
 
     private fun showCarsInfo() {
+
         parkingLotSpots.forEachIndexed { index, car ->
 
             val spotNumber = index + 1

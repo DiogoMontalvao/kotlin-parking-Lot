@@ -10,10 +10,6 @@ private const val EXIT = "exit"
 private val parkingLot = ParkingLot()
 
 fun main() {
-    runProgram()
-}
-
-private fun runProgram() {
     var isRunning = true
     while (isRunning) {
         val command = scanner.next()
