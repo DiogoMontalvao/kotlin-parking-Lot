@@ -7,26 +7,20 @@ class ParkingLot() {
     private var parkingLotSpots = MutableList<Car?>(0) { SPOT_FREE }
 
     fun create(maxCapacity: Int) {
-
         parkingLotSpots = MutableList(maxCapacity) { SPOT_FREE }
         isParkingLotCreated = true
         println("Created a parking lot with $maxCapacity spots.")
     }
 
     fun park(car: Car) {
-
         if (isParkingLotCreated) {
-
             if (isParkingLotFull()) {
-
                 println("Sorry, the parking lot is full.")
             } else {
                 for (spotIndex in parkingLotSpots.indices) {
-
                     val spotNumber = spotIndex + 1
 
                     if (parkingLotSpots[spotIndex] == SPOT_FREE) {
-
                         parkingLotSpots[spotIndex] = car
                         println("${car.color} car parked in spot $spotNumber.")
                         break
@@ -39,11 +33,8 @@ class ParkingLot() {
     }
 
     fun status() {
-
         if (isParkingLotCreated) {
-
             if (isParkingLotEmpty()) {
-
                 println("Parking lot is empty.")
             } else {
                 showCarsInfo()
@@ -54,11 +45,9 @@ class ParkingLot() {
     }
 
     fun leave(spotNumber: Int) {
-
         val spotIndex = spotNumber - 1
 
         if (isParkingLotCreated) {
-
             if (parkingLotSpots[spotIndex] == SPOT_FREE) {
                 println("There is no car in spot $spotNumber.")
             } else {
@@ -71,7 +60,6 @@ class ParkingLot() {
     }
 
     private fun isParkingLotFull(): Boolean {
-
         var spotsOccupied = 0
 
         parkingLotSpots.forEach { spot ->
@@ -82,7 +70,6 @@ class ParkingLot() {
     }
 
     private fun isParkingLotEmpty(): Boolean {
-
         var isEmpty = true
 
         for (spot in parkingLotSpots) {
@@ -96,9 +83,7 @@ class ParkingLot() {
     }
 
     private fun showCarsInfo() {
-
         parkingLotSpots.forEachIndexed { index, car ->
-
             val spotNumber = index + 1
 
             if (car != SPOT_FREE) {
