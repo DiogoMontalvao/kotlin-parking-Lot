@@ -7,37 +7,39 @@ private const val PARK = "park"
 private const val LEAVE = "leave"
 private const val EXIT = "exit"
 
-private val parkingLot = ParkingLot()
-
 fun main() {
+    val parkingLot = ParkingLot()
+
     var isRunning = true
     while (isRunning) {
         val command = scanner.next()
 
         when (command) {
-            CREATE -> create()
+            CREATE -> create(parkingLot)
             STATUS -> parkingLot.status()
-            PARK -> park()
-            LEAVE -> leave()
+            PARK -> park(parkingLot)
+            LEAVE -> leave(parkingLot)
             EXIT -> isRunning = false
         }
     }
 }
 
-private fun create() {
+private fun create(parkingLot: ParkingLot) {
     val maxCapacity = scanner.nextInt()
 
     parkingLot.create(maxCapacity)
 }
 
-private fun park() {
+private fun park(parkingLot: ParkingLot) {
     val registrationNumber = scanner.next()
     val color = scanner.next()
 
-    parkingLot.park(Car(registrationNumber, color))
+    parkingLot.park(
+        Car(registrationNumber, color)
+    )
 }
 
-private fun leave() {
+private fun leave(parkingLot: ParkingLot) {
     val spotNumber = scanner.nextInt()
 
     parkingLot.leave(spotNumber)
