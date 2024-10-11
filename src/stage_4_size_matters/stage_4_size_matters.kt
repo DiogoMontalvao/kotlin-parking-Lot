@@ -34,9 +34,7 @@ private fun park(parkingLot: ParkingLot) {
     val registrationNumber = scanner.next()
     val color = scanner.next()
 
-    parkingLot.park(
-        Car(registrationNumber, color)
-    )
+    parkingLot.park(Car(registrationNumber, color))
 }
 
 private fun leave(parkingLot: ParkingLot) {
