@@ -59,7 +59,7 @@ class ParkingLot() {
             return
         }
 
-        if (parkingLot[spotIndex] == SPOT_FREE) {
+        if (parkingLot.isSpotFree(spotIndex)) {
             println("There is no car in spot $spotNumber.")
             return
         }
@@ -68,11 +68,8 @@ class ParkingLot() {
         println("Spot $spotNumber is free.")
     }
 
-    private fun isParkingLotFull(): Boolean {
-        if (parkingLot.contains(SPOT_FREE)) return false
-
-        return true
-    }
+    private fun isParkingLotFull() =
+        if (SPOT_FREE in parkingLot) false else true
 
     private fun isParkingLotEmpty(): Boolean {
         for (spot in parkingLot) {
@@ -81,4 +78,7 @@ class ParkingLot() {
 
         return true
     }
+
+    private fun List<Car?>.isSpotFree(spotIndex: Int) =
+        this[spotIndex] == SPOT_FREE
 }
