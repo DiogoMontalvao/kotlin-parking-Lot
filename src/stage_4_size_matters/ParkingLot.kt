@@ -8,7 +8,6 @@ class ParkingLot() {
 
     fun create(maxCapacity: Int) {
         parkingLot = MutableList(maxCapacity) { SPOT_FREE }
-
         isParkingLotCreated = true
         println("Created a parking lot with $maxCapacity spots.")
     }
@@ -42,11 +41,11 @@ class ParkingLot() {
             return
         }
 
-        parkingLot.forEachIndexed { index, car ->
-            val spotNumber = index + 1
+        parkingLot.forEachIndexed { spotIndex, car ->
+            val spotNumber = spotIndex + 1
 
-            if (car != SPOT_FREE) {
-                println("$spotNumber ${car.registrationNumber} ${car.color}")
+            if (!isSpotFree(spotIndex)) {
+                println("$spotNumber ${car?.registrationNumber} ${car?.color}")
             }
         }
     }
@@ -59,7 +58,7 @@ class ParkingLot() {
             return
         }
 
-        if (parkingLot.isSpotFree(spotIndex)) {
+        if (isSpotFree(spotIndex)) {
             println("There is no car in spot $spotNumber.")
             return
         }
@@ -68,17 +67,15 @@ class ParkingLot() {
         println("Spot $spotNumber is free.")
     }
 
-    private fun isParkingLotFull() =
-        if (SPOT_FREE in parkingLot) false else true
+    private fun isParkingLotFull() = SPOT_FREE !in parkingLot
 
     private fun isParkingLotEmpty(): Boolean {
-        for (spot in parkingLot) {
-            if (spot != SPOT_FREE) return false
+        for (spotIndex in parkingLot.indices) {
+            if (!isSpotFree(spotIndex)) return false
         }
 
         return true
     }
 
-    private fun List<Car?>.isSpotFree(spotIndex: Int) =
-        this[spotIndex] == SPOT_FREE
+    private fun isSpotFree(spotIndex: Int) = parkingLot[spotIndex] == SPOT_FREE
 }

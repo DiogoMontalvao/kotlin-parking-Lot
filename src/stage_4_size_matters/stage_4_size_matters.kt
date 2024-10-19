@@ -10,19 +10,23 @@ private const val EXIT = "exit"
 fun main() {
     val parkingLot = ParkingLot()
 
-    var isRunning = true
-    while (isRunning) {
+    do {
         val command = scanner.next()
 
-        when (command) {
-            CREATE -> create(parkingLot)
-            STATUS -> parkingLot.status()
-            PARK -> park(parkingLot)
-            LEAVE -> leave(parkingLot)
-            EXIT -> isRunning = false
-        }
+        execCommand(command, parkingLot)
+    } while (isRunning(command))
+}
+
+private fun execCommand(command: String, parkingLot: ParkingLot) {
+    when (command) {
+        CREATE -> create(parkingLot)
+        STATUS -> parkingLot.status()
+        PARK -> park(parkingLot)
+        LEAVE -> leave(parkingLot)
     }
 }
+
+private fun isRunning(command: String) = command != EXIT
 
 private fun create(parkingLot: ParkingLot) {
     val maxCapacity = scanner.nextInt()
