@@ -8,13 +8,16 @@ private const val LEAVE = "leave"
 private const val EXIT = "exit"
 
 fun main() {
+    runApp()
+}
+
+private fun runApp() {
     val parkingLot = ParkingLot()
 
     do {
         val command = scanner.next()
-
         execCommand(command, parkingLot)
-    } while (isRunning(command))
+    } while (command != EXIT)
 }
 
 private fun execCommand(command: String, parkingLot: ParkingLot) {
@@ -25,8 +28,6 @@ private fun execCommand(command: String, parkingLot: ParkingLot) {
         LEAVE -> leave(parkingLot)
     }
 }
-
-private fun isRunning(command: String) = command != EXIT
 
 private fun create(parkingLot: ParkingLot) {
     val maxCapacity = scanner.nextInt()

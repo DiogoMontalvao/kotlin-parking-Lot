@@ -4,7 +4,7 @@ private const val PARKED = 2
 
 fun main() {
     var command = PARK
-    while (scanner.hasNext()) {
+    while (command < 3) {
         val carColor = scanner.next()
 
         when (command) {
@@ -13,7 +13,5 @@ fun main() {
             PARKED -> println("$carColor car just parked here.")
         }
         command++
-
-        if (command > PARKED) command = PARK
     }
 }
