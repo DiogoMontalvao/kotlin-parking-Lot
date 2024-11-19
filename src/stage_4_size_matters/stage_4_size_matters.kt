@@ -8,10 +8,6 @@ private const val LEAVE = "leave"
 private const val EXIT = "exit"
 
 fun main() {
-    runApp()
-}
-
-private fun runApp() {
     val parkingLot = ParkingLot()
 
     do {

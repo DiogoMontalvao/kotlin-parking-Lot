@@ -3,12 +3,19 @@ package stage_4_size_matters
 private val SPOT_FREE = null
 
 class ParkingLot() {
-    private var isParkingLotCreated = false
     private var parkingLot = MutableList<Car?>(0) { SPOT_FREE }
 
-    fun create(maxCapacity: Int) {
-        parkingLot = MutableList(maxCapacity) { SPOT_FREE }
+    private var isParkingLotCreated = false
+    private var maxCapacity = -1
+    private var occupiedSpots = -1
+
+    fun create(_maxCapacity: Int) {
+        parkingLot = MutableList(_maxCapacity) { SPOT_FREE }
+
         isParkingLotCreated = true
+        maxCapacity = _maxCapacity
+        occupiedSpots = 0
+
         println("Created a parking lot with $maxCapacity spots.")
     }
 
@@ -26,7 +33,9 @@ class ParkingLot() {
         val spotIndex = parkingLot.indexOf(SPOT_FREE)
         val spotNumber = spotIndex + 1
 
+        occupiedSpots++
         parkingLot[spotIndex] = car
+
         println("${car.color} car parked in spot $spotNumber.")
     }
 
@@ -44,7 +53,7 @@ class ParkingLot() {
         parkingLot.forEachIndexed { spotIndex, car ->
             val spotNumber = spotIndex + 1
 
-            if (!isSpotFree(spotIndex)) {
+            if (isSpotOccupied(spotIndex)) {
                 println("$spotNumber ${car?.registrationNumber} ${car?.color}")
             }
         }
@@ -58,24 +67,20 @@ class ParkingLot() {
             return
         }
 
-        if (isSpotFree(spotIndex)) {
+        if (!isSpotOccupied(spotIndex)) {
             println("There is no car in spot $spotNumber.")
             return
         }
 
         parkingLot[spotIndex] = SPOT_FREE
+        occupiedSpots--
+
         println("Spot $spotNumber is free.")
     }
 
-    private fun isParkingLotFull() = SPOT_FREE !in parkingLot
+    private fun isParkingLotFull() = occupiedSpots == maxCapacity
 
-    private fun isParkingLotEmpty(): Boolean {
-        for (spotIndex in parkingLot.indices) {
-            if (!isSpotFree(spotIndex)) return false
-        }
+    private fun isParkingLotEmpty() = occupiedSpots == 0
 
-        return true
-    }
-
-    private fun isSpotFree(spotIndex: Int) = parkingLot[spotIndex] == SPOT_FREE
+    private fun isSpotOccupied(spotIndex: Int) = parkingLot[spotIndex] != SPOT_FREE
 }
