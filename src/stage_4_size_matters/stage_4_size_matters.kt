@@ -6,6 +6,9 @@ private const val STATUS = "status"
 private const val PARK = "park"
 private const val LEAVE = "leave"
 private const val EXIT = "exit"
+private const val REG_BY_COLOR = "reg_by_color"
+private const val SPOT_BY_COLOR = "spot_by_color"
+private const val SPOT_BY_REG = "spot_by_reg"
 
 fun main() {
     val parkingLot = ParkingLot()
@@ -22,24 +25,45 @@ private fun execCommand(command: String, parkingLot: ParkingLot) {
         STATUS -> parkingLot.status()
         PARK -> park(parkingLot)
         LEAVE -> leave(parkingLot)
+        REG_BY_COLOR -> regByColor(parkingLot)
+        SPOT_BY_COLOR -> spotByColor(parkingLot)
+        SPOT_BY_REG -> spotByReg(parkingLot)
     }
 }
 
 private fun create(parkingLot: ParkingLot) {
     val maxCapacity = scanner.nextInt()
 
-    parkingLot.create(maxCapacity)
+    println(parkingLot.create(maxCapacity))
 }
 
 private fun park(parkingLot: ParkingLot) {
     val registrationNumber = scanner.next()
     val color = scanner.next()
 
-    parkingLot.park(Car(registrationNumber, color))
+    println(parkingLot.park(Car(registrationNumber, color)))
 }
 
 private fun leave(parkingLot: ParkingLot) {
     val spotNumber = scanner.nextInt()
 
-    parkingLot.leave(spotNumber)
+    println(parkingLot.leave(spotNumber))
+}
+
+private fun regByColor(parkingLot: ParkingLot) {
+    val color = scanner.next().uppercase()
+
+    println(parkingLot.regByColor(color))
+}
+
+private fun spotByColor(parkingLot: ParkingLot) {
+    val color = scanner.next().uppercase()
+
+    println(parkingLot.spotByColor(color))
+}
+
+private fun spotByReg(parkingLot: ParkingLot) {
+    val registrationNumber = scanner.next().uppercase()
+
+    println(parkingLot.spotByReg(registrationNumber))
 }
