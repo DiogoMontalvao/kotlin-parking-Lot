@@ -1,5 +1,7 @@
 package stage_4_size_matters
 
+import stage_4_size_matters.Car
+
 private val SPOT_FREE = null
 
 class ParkingLot() {
@@ -9,42 +11,26 @@ class ParkingLot() {
     private var maxCapacity = -1
     private var occupiedSpots = -1
 
-    private fun isParkingLotFull() = occupiedSpots == maxCapacity
-
-    private fun isParkingLotEmpty() = occupiedSpots == 0
-
-    private fun isSpotOccupied(spotIndex: Int) = parkingLot[spotIndex] != SPOT_FREE
-
-    private fun isParkedCarColor(color: String): Boolean {
-        parkingLot.forEach { car ->
-            if (car?.color?.uppercase() == color) return true
-        }
-
-        return false
-    }
-
-    private fun isParkedRegistrationNumber(registrationNumber: String): Boolean {
-        parkingLot.forEach { car ->
-            if (car?.registrationNumber?.uppercase() == registrationNumber.uppercase()) return true
-        }
-
-        return false
-    }
-
-    fun create(_maxCapacity: Int): String {
+    fun create(_maxCapacity: Int) {
         parkingLot = MutableList(_maxCapacity) { SPOT_FREE }
 
         isParkingLotCreated = true
         maxCapacity = _maxCapacity
         occupiedSpots = 0
 
-        return "Created a parking lot with $maxCapacity spots."
+        println("Created a parking lot with $maxCapacity spots.")
     }
 
-    fun park(car: Car): String {
-        if (!isParkingLotCreated) return "Sorry, a parking lot has not been created."
+    fun park(car: Car) {
+        if (!isParkingLotCreated) {
+            println("Sorry, a parking lot has not been created.")
+            return
+        }
 
-        if (isParkingLotFull()) return "Sorry, the parking lot is full."
+        if (isParkingLotFull()) {
+            println("Sorry, the parking lot is full.")
+            return
+        }
 
         val spotIndex = parkingLot.indexOf(SPOT_FREE)
         val spotNumber = spotIndex + 1
@@ -52,7 +38,7 @@ class ParkingLot() {
         occupiedSpots++
         parkingLot[spotIndex] = car
 
-        return "${car.color} car parked in spot $spotNumber."
+        println("${car.color} car parked in spot $spotNumber.")
     }
 
     fun status() {
@@ -75,71 +61,28 @@ class ParkingLot() {
         }
     }
 
-    fun leave(spotNumber: Int): String {
+    fun leave(spotNumber: Int) {
         val spotIndex = spotNumber - 1
 
-        if (!isParkingLotCreated) return "Sorry, a parking lot has not been created."
+        if (!isParkingLotCreated) {
+            println("Sorry, a parking lot has not been created.")
+            return
+        }
 
-        if (!isSpotOccupied(spotIndex)) return "There is no car in spot $spotNumber."
+        if (!isSpotOccupied(spotIndex)) {
+            println("There is no car in spot $spotNumber.")
+            return
+        }
 
         parkingLot[spotIndex] = SPOT_FREE
         occupiedSpots--
 
-        return "Spot $spotNumber is free."
+        println("Spot $spotNumber is free.")
     }
 
-    fun regByColor(color: String): String {
-        if (!isParkingLotCreated) return "Sorry, a parking lot has not been created."
+    private fun isParkingLotFull() = occupiedSpots == maxCapacity
 
-        if (isParkingLotEmpty()) return "No cars with color $color were found."
+    private fun isParkingLotEmpty() = occupiedSpots == 0
 
-        if (!isParkedCarColor(color)) return "No cars with color $color were found."
-
-        val registrationNumbers = mutableListOf<String>()
-
-        parkingLot.forEachIndexed { spotIndex, car ->
-            if (isSpotOccupied(spotIndex) && car?.color?.uppercase() == color)
-                registrationNumbers.add(car.registrationNumber)
-        }
-
-        return registrationNumbers.joinToString()
-    }
-
-    fun spotByColor(color: String): String {
-        if (!isParkingLotCreated) return "Sorry, a parking lot has not been created."
-
-        if (isParkingLotEmpty()) return "No cars with color $color were found."
-
-        if (!isParkedCarColor(color)) return "No cars with color $color were found."
-
-        val spotNumbers = mutableListOf<Int>()
-
-        parkingLot.forEachIndexed { spotIndex, car ->
-            val spotNumber = spotIndex + 1
-
-            if (isSpotOccupied(spotIndex) && car?.color?.uppercase() == color)
-                spotNumbers.add(spotNumber)
-        }
-
-        return spotNumbers.joinToString()
-    }
-
-    fun spotByReg(registrationNumber: String): String {
-        if (!isParkingLotCreated) return "Sorry, a parking lot has not been created."
-
-        if (isParkingLotEmpty())
-            return "No cars with registration number $registrationNumber were found."
-
-        if (!isParkedRegistrationNumber(registrationNumber))
-            return "No cars with registration number $registrationNumber were found."
-
-        var spotNumber = -1
-
-        parkingLot.forEachIndexed { spotIndex, car ->
-            if (isSpotOccupied(spotIndex) && car?.registrationNumber?.uppercase() == registrationNumber)
-                spotNumber = spotIndex + 1
-        }
-
-        return spotNumber.toString()
-    }
+    private fun isSpotOccupied(spotIndex: Int) = parkingLot[spotIndex] != SPOT_FREE
 }
