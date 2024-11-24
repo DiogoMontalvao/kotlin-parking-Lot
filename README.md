@@ -1,6 +1,7 @@
 # Kotlin - Parking Lot
-Desenvolvido a partir do projeto: [Kotlin Developer - Parking Lot](https://hyperskill.org/projects/75), disponibilizado pela Hyperskill - JetBrains Academy.<br><br>
-Projeto desenvolvido a partir dos requisitos solicitados nas etapas de implementação.
+Desenvolvido a partir do projeto: [Kotlin Developer - Parking Lot](https://hyperskill.org/projects/75).<br>
+Disponibilizado pela Hyperskill - JetBrains Academy.<br><br>
+Funcionalidades desenvolvidas a partir dos requisitos solicitados nas etapas de implementação.
 
 ##
 ### Estudo das ferramentas:
