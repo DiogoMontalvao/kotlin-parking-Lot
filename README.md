@@ -6,11 +6,11 @@ Funcionalidades desenvolvidas a partir dos requisitos solicitados nas etapas de 
 ##
 ### Estudo das ferramentas:
   - Variable, Constant, Data Type, Type Conversion, Structural vs Referencial equality
-  - Working and Processing String, Substring, Char
+  - Processing String, Substring, Char
   - Standard Input, Java Scanner, Readln
-  - Function,Functional Decomposition, Conditional Expression (If/When)
-  - Object-Oriented Programming, Class, Data Class,Fields, Methods, Constructor, Inheritance, Polymorphism
-  - Data Structures, List, MutableList, Range, Stack, Call Stack,
+  - Function, Functional Decomposition, Conditional Expression (If/When)
+  - Object-Oriented Programming, Class, Data Class, Fields, Methods, Constructor, Inheritance, Polymorphism
+  - Data Structures, List, MutableList, Range, Stack, Call Stack
   - Loops, For, While, Do While, Jumps and Returns, ForEach, ForEachIndexed
   - Null Safety, Handling Erros, Exceptions, Try-Catch
 
